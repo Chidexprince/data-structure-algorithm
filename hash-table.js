@@ -113,6 +113,7 @@ function containCommonItem2(arr1, arr2) {
 
 
 /* Exercise 2 
+Google Question
 * Given an array find the first recurring character
 * Given an array = [2,5,1,2,3,5,1,2,4];
 * It should return 2
@@ -148,7 +149,7 @@ firstRecurringCharacter(array);
 /* Better solution */
 function firstRecurringCharacter2(arr){
     let map = {};
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         if(!map[arr[i]]) {
             const element = arr[i];
             map[element] = true;
