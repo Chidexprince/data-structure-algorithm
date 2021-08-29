@@ -56,6 +56,41 @@ class BinarySearchTree {
         }
         return false
     }
+
+    /* Breadth First Search */
+    breadthFirstSearch() {
+        let currentNode = this.root;
+        let list = [];
+        let queue = [];
+        queue.push(currentNode);
+
+        while(queue.length > 0){
+            currentNode = queue.shift();
+            list.push(currentNode.value);
+            if(currentNode.left){
+                queue.push(currentNode.left);
+            }
+            if(currentNode.right){
+                queue.push(currentNode.right)
+            }
+        }
+        return list
+
+    }
+
+    /* Depth First Search */
+    depthFirstSearchPreOrder(){
+        return traversePreOrder(this.root, []);
+    }
+
+    depthFirstSearchInOrder(){
+        return traverseInOrder(this.root, []);
+    }
+
+    depthFirstSearchPostOrder(){
+        return traversePostOrder(this.root, []);
+    }
+
 }
 
 const tree = new BinarySearchTree();
@@ -71,4 +106,46 @@ function traverse(node) {
     tree.left = node.left === null ? null : traverse(node.left);
     tree.right = node.right === null ? null : traverse(node.right);
     return tree;
+}
+
+
+function traverseInOrder(node, list) {
+    console.log(node.value)
+    if(node.left) {
+        traverseInOrder(node.left, list)
+    }
+    list.push(node.value);
+    if(node.right) {
+        traverseInOrder(node.right, list)
+    }
+
+    return list
+}
+
+function traversePreOrder(node, list) {
+    list.push(node.value);
+    console.log(node.value)
+    if(node.left) {
+        traversePreOrder(node.left, list)
+    }
+    
+    if(node.right) {
+        traversePreOrder(node.right, list)
+    }
+
+    return list
+}
+
+function traversePostOrder(node, list) {
+
+    console.log(node.value)
+    if(node.left) {
+        traversePostOrder(node.left, list)
+    }
+    
+    if(node.right) {
+        traversePostOrder(node.right, list)
+    }
+    list.push(node.value);
+    return list
 }
