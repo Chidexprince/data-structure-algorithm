@@ -42,3 +42,72 @@ var backspaceCompare = function(s, t) {
 
     return true
 };
+
+
+/* Given a string s, find the length of the longest substring without repeating characters.
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+
+Brute force solution Time Complexity: O(n^2), Space Complexity: O(n)
+*/
+
+var lengthOfLongestSubstring = function(s) {
+    if(s.length <= 1) return s.length;
+
+    let longest = 0;
+
+    for(let left = 0; left < s.length; left++) {
+        let seenChars = {}, currentLongest = 0;
+
+        for(let right = left; right < s.length; right++) {
+            const currentChar = s[right];
+
+            if(!seenChars[currentChar]) {
+                currentLongest++;
+                seenChars[currentChar] = true;
+                longest = Math.max(longest, currentLongest);
+            } else {
+                break;
+            }
+        }
+    }
+
+};
+
+
+
+
+
+/* Optimized Solution Time Complexity: O(n), Space Complexity: O(n) */
+
+var lengthOfLongestSubstring = function(s) {
+    if (s.length <= 1) return s.length;
+
+    const seenChars = {}
+    let longest = 0, left = 0;
+    for(let right = 0; right < s.length; right++){
+        const currentChar = s[right];
+        const previouslySeenChar = seenChars[currentChar];
+
+        if(previouslySeenChar >= left) {
+            left = previouslySeenChar + 1;
+        }
+
+        seenChars[currentChar] = right;
+
+        longest = Math.max(longest, right - left + 1);
+    }
+
+    
+  return longest;
+    
+};
