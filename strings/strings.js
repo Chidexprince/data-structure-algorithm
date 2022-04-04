@@ -1,3 +1,32 @@
+// Create a function that reverses a string:
+// 'Hi My name is Prince' should be
+// 'ecnirP si eman yM iH'
+
+function reverseString(str) {
+    if(!str || str.length < 2 || typeof str !== 'string') {
+        return 'Please pass a string';
+    }
+
+    const reversedWord = [];
+
+    for(let i = str.length - 1; i >= 0; i--) {
+      reversedWord.push(str[i]);
+    }
+
+  return reversedWord.join('');
+}
+
+function reverseString2(str) {
+    if(!str || str.length < 2 || typeof str !== 'string') {
+        return 'Please pass a string';
+    }
+
+    return str.split('').reverse().join('');
+}
+
+const reverseString3 = str = [...str].reverse().join('');
+
+
 
 /* Given two strings s and t, return true if they are equal when both are typed into empty text editors. 
 '#' means a backspace character.
