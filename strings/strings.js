@@ -24,7 +24,48 @@ function reverseString2(str) {
     return str.split('').reverse().join('');
 }
 
-const reverseString3 = str = [...str].reverse().join('');
+const reverseString3 = str => [...str].reverse().join('');
+
+/* Palindrome Check
+A Palindrome is a string that reads the same forwards and backwards. This means that the second half of the string is the reverse of the first half.
+Examples
+The following are palindromes (thus would return TRUE):
+- "pop"     ->  p + o + p
+- "deed"    ->  de + ed
+The following are NOT palindromes (thus would return FALSE):
+- "rad"
+- "dodo"
+*/
+
+function isPalindrome1(str) {
+    if(!str || str.length < 2 || typeof str !== 'string') {
+        return 'pass string';
+    }
+    let reversedString = str.split('').reverse().join('');
+    return str === reversedString ? 'YES' : 'NO';
+}
+
+function isPalindrome2(str) {
+    if(!str || str.length < 2 || typeof str !== 'string') {
+        return 'pass string';
+    }
+
+    let left = 0;
+    let right = str.length - 1;
+
+    while(left < right) {
+        console.log(left, right)
+        if(str[left] !== str[right]) {
+            return 'NO';
+        }
+        left += 1;
+        right -= 1;
+    }
+
+    return 'YES';
+
+}
+
 
 
 
