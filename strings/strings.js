@@ -54,7 +54,6 @@ function isPalindrome2(str) {
     let right = str.length - 1;
 
     while(left < right) {
-        console.log(left, right)
         if(str[left] !== str[right]) {
             return 'NO';
         }
