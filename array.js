@@ -116,3 +116,59 @@ function mergeSortedArrays(arr1, arr2){
 
     return mergeArray;
   }
+
+
+/*
+Leetcode
+1662. Check If Two String Arrays are Equivalent
+Given two string arrays word1 and word2, return true if the two arrays represent the same string, and false otherwise.
+
+A string is represented by an array if the array elements concatenated in order forms the string. 
+
+Example 2:
+
+Input: word1 = ["a", "cb"], word2 = ["ab", "c"]
+Output: false
+Example 3:
+
+Input: word1  = ["abc", "d", "defg"], word2 = ["abcddefg"]
+Output: true
+*/
+
+function arrayStringsAreEqual(word1, word2) {
+  // Array check
+  if(!Array.isArray(word1) || !Array.isArray(word2)) {
+    return false;
+  }
+  if(word1.join('') === word2.join('')) {
+    return true
+  }
+
+  return false;
+}
+
+
+/*
+Leetcode
+1929. Concatenation of Array
+Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+
+Specifically, ans is the concatenation of two nums arrays.
+
+Return the array ans.
+
+*/
+
+function getConcatenation1(nums) {
+  // check array
+  let ans = [...nums, ...nums];
+  return ans;
+}
+
+function getConcatenation2(nums) {
+  let len = nums.length;
+  for (let i = 0; i < len; i++) {
+    nums.push(nums[i]);
+  }
+  return nums;
+}
