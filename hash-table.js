@@ -162,3 +162,101 @@ function firstRecurringCharacter2(arr){
 
 }
 // O(n)
+
+/* 
+217. Contains Duplicate
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: true
+Example 2:
+
+Input: nums = [1,2,3,4]
+Output: false
+
+*/
+
+// Naive Approach
+function containsDuplicate1(arr) {
+    // check
+    if(!Array.isArray(arr)) {
+        return 'Pass an array';
+    }
+
+    for(let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if(arr[i] === arr[j]) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function containsDuplicate2(arr) {
+    let map = {};
+    
+    for(let i = 0; i < arr.length; i++) {
+        if(!map[arr[i]]) {
+            map[arr[i]] = true;
+        } else {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/*
+771. Jewels and Stones
+Easy
+You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
+
+Letters are case sensitive, so "a" is considered a different type of stone from "A".
+
+ 
+Example 1:
+
+Input: jewels = "aA", stones = "aAAbbbb"
+Output: 3
+Example 2:
+
+Input: jewels = "z", stones = "ZZ"
+Output: 0 
+
+*/
+
+// Naive approach : nested for loop
+function numJewelsInStones1 (jewels, stones) {
+    let count = 0;
+    for(let i = 0; i < jewels.length; i++) {
+        for(let j = 0; j < stones.length; j++) {
+            if(jewels[i] === stones[j]) {
+                count++;
+            }
+        }
+    }
+    return count;
+}; // O(n^2)
+
+// optimized approach: hashtable
+
+function numJewelsInStones2 (jewels, stones) {
+    let map = {};
+    let count = 0;
+
+    for(let i = 0; i < jewels.length; i++) {
+        const element = jewels[i];
+        map[element] = true;
+    }
+
+    for(let j = 0; j < stones.length; j++) {
+        if(map[stones[j]]) {
+            count++;
+        }
+    }
+    return count;
+}
+
