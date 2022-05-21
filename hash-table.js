@@ -242,7 +242,6 @@ function numJewelsInStones1 (jewels, stones) {
 }; // O(n^2)
 
 // optimized approach: hashtable
-
 function numJewelsInStones2 (jewels, stones) {
     let map = {};
     let count = 0;
@@ -257,6 +256,208 @@ function numJewelsInStones2 (jewels, stones) {
             count++;
         }
     }
-    return count;
+    return {map, count};
 }
 
+/* 
+1832. Check if the Sentence Is Pangram
+A pangram is a sentence where every letter of the English alphabet appears at least once.
+
+Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
+
+Example 1:
+Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
+Output: true;
+Explanation: sentence contains at least one of every letter of the English alphabet.
+
+Example 2:
+
+Input: sentence = "leetcode"
+Output: false
+
+*/
+
+function checkIfPangram1(sentence) {
+    if(!sentence || typeof sentence !== 'string' || sentence.length < 26) {
+        return false;
+    }
+    const map = [];
+
+    for(let i = 0; i < sentence.length; i++) {
+        if(!map.includes(sentence[i])) {
+            map.push(sentence[i])
+        }
+    }
+
+    return map.length === 26;
+}
+
+function checkIfPangram2(sentence) {
+    return new Set(sentence).size === 26;
+}
+
+/* 
+349. Intersection of Two Arrays
+
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+
+Example 1:
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+Example 2:
+
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [9,4]
+Explanation: [4,9] is also accepted.
+*/
+
+function intersection(nums1, nums2) {
+    if(!Array.isArray(nums1) || !Array.isArray(nums2)) {
+        return;
+    }
+    const intersection = [];
+    const map = {};
+
+
+    for (let i = 0; i < nums1.length; i++) {
+        if(!map[nums1[i]]) {
+            const element = nums1[i];
+            map[element] = true;
+        }        
+    }
+
+    for (let j = 0; j < nums2.length; j++) {
+        if(map[nums2[j]] && !intersection.includes(nums2[j])) {
+            intersection.push(nums2[j]);
+        }
+    }
+    
+    return intersection
+}
+
+/* 
+961. N-Repeated Element in Size 2N Array
+You are given an integer array nums with the following properties:
+
+nums.length == 2 * n.
+nums contains n + 1 unique elements.
+Exactly one element of nums is repeated n times.
+Return the element that is repeated n times.
+
+Example 1:
+Input: nums = [1,2,3,3]
+Output: 3
+
+Example 2:
+Input: nums = [2,1,2,5,3,2]
+Output: 2
+
+*/
+
+function repeatedNTimes1(nums) {
+    if(!Array.isArray(nums)) {
+        return
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        for(let j = i + 1; j < nums.length; j++) {
+            if(nums[i] === nums[j]) {
+                return nums[i];
+            }
+        }
+    }
+} // O(n^2)
+
+
+function repeatedNTimes2(nums) {
+    if(!Array.isArray(nums)) {
+        return
+    }
+
+    const map = {};
+    for (let i = 0; i < nums.length; i++) {
+        map[nums[i]] = true;
+    }
+
+    for (let j = 0; j < nums.length; j++) {
+        if(map[nums[j]]) {
+            return nums[j];
+        }
+    }
+} //O(n)
+
+
+/*
+1619. Mean of Array After Removing Some Elements
+Given an integer array arr, return the mean of the remaining integers after removing the smallest 5% and the largest 5% of the elements.
+
+Answers within 10^-5 of the actual answer will be considered accepted.
+
+Example 1:
+Input: arr = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]
+Output: 2.00000
+Explanation: After erasing the minimum and the maximum values of this array, all elements are equal to 2, so the mean is 2.
+
+Example 2:
+Input: arr = [6,2,7,5,1,2,0,3,10,2,5,0,5,5,0,8,7,6,8,0]
+Output: 4.00000
+
+*/
+
+function trimMean(arr) {
+    if(!Array.isArray(arr)) {
+        return
+    }
+    let sum = 0;
+    let sortedArr = arr.sort((a,b) => a - b);
+    const removalLength = 0.05 * arr.length; // get 5% item to remove
+
+    sortedArr.splice(0, removalLength) // remove 5% item from the start of the array
+    sortedArr.splice(arr.length - removalLength, removalLength) // remove 5% item from the end
+    const finalLength = sortedArr.length;
+
+    for (let i = 0; i < sortedArr.length; i++) {
+        sum += sortedArr[i]
+    }
+
+    return (sum/finalLength).toFixed(5)
+
+}
+
+/*
+1491. Average Salary Excluding the Minimum and Maximum Salary
+
+You are given an array of unique integers salary where salary[i] is the salary of the ith employee.
+Return the average salary of employees excluding the minimum and maximum salary. Answers within 10-5 of the actual answer will be accepted. 
+
+Example 1:
+Input: salary = [4000,3000,1000,2000]
+Output: 2500.00000
+Explanation: Minimum salary and maximum salary are 1000 and 4000 respectively.
+Average salary excluding minimum and maximum salary is (2000+3000) / 2 = 2500
+
+Example 2:
+Input: salary = [1000,2000,3000]
+Output: 2000.00000
+Explanation: Minimum salary and maximum salary are 1000 and 3000 respectively.
+Average salary excluding minimum and maximum salary is (2000) / 1 = 2000
+
+*/
+
+function average(salary) {
+    if(!Array.isArray(salary)) {
+        return
+    }
+
+    salary.sort((a,b) => a - b );
+    salary.pop();
+    salary.shift();
+    const length = salary.length;
+    let sum = 0;
+
+    for(let i = 0; i < salary.length; i++) {
+        sum += salary[i];
+    }
+
+    return sum/length;
+}
