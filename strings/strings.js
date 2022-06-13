@@ -180,3 +180,136 @@ var lengthOfLongestSubstring = function(s) {
   return longest;
     
 };
+
+/* 
+1678. Goal Parser Interpretation
+You own a Goal Parser that can interpret a string command. The command consists of an alphabet of "G", "()" and/or "(al)" in some order. The Goal Parser will interpret "G" as the string "G", "()" as the string "o", and "(al)" as the string "al". The interpreted strings are then concatenated in the original order.
+
+Given the string command, return the Goal Parser's interpretation of command.
+
+Example 1:
+Input: command = "G()(al)"
+Output: "Goal"
+Explanation: The Goal Parser interprets the command as follows:
+G -> G
+() -> o
+(al) -> al
+The final concatenated result is "Goal".
+
+Example 2:
+Input: command = "G()()()()(al)"
+Output: "Gooooal"
+
+Example 3:
+Input: command = "(al)G(al)()()G"
+Output: "alGalooG"
+
+*/
+
+/**
+ * @param {string} command
+ * @return {string}
+ */
+ var interpret = function(command) {
+    let result = '';
+    
+    for(let i = 0; i < command.length; i++) {
+        if(command[i] === "(" && command[i+1] === ")") {
+            result += 'o';
+        } 
+        else if (command[i] === "(" && command[i+1] === "a") {
+            result += command[i+1];
+        } 
+        else if (command[i] === "l" && command[i+1] === ")") {
+            result += command[i]
+        }
+        else if (command[i] === 'G') {
+            result += command[i]
+        }
+    }
+    return result;
+}; // 0(N)
+
+// Using in-built functions
+var interpret = function(command) {
+    return command.split("()").join("o").split("(al)").join("al");
+};
+
+
+/*
+2114. Maximum Number of Words Found in Sentences
+A sentence is a list of words that are separated by a single space with no leading or trailing spaces.
+You are given an array of strings sentences, where each sentences[i] represents a single sentence.
+Return the maximum number of words that appear in a single sentence.
+
+Example 1:
+Input: sentences = ["alice and bob love leetcode", "i think so too", "this is great thanks very much"]
+Output: 6
+Explanation: 
+- The first sentence, "alice and bob love leetcode", has 5 words in total.
+- The second sentence, "i think so too", has 4 words in total.
+- The third sentence, "this is great thanks very much", has 6 words in total.
+Thus, the maximum number of words in a single sentence comes from the third sentence, which has 6 words.
+
+Example 2:
+Input: sentences = ["please wait", "continue to fight", "continue to win"]
+Output: 3
+Explanation: It is possible that multiple sentences contain the same number of words. 
+In this example, the second and third sentences (underlined) have the same number of words.
+
+*/
+
+/**
+ * @param {string[]} sentences
+ * @return {number}
+ */
+ var mostWordsFound = function(sentences) {
+    let maxWords = 0;
+    
+    for (let i = 0; i < sentences.length; i++) {
+        let senLen = sentences[i].split(" ").length;
+        maxWords = maxWords > senLen ? maxWords : senLen;
+    }
+    
+    return maxWords
+};
+
+
+/* 
+1108. Defanging an IP Address
+Given a valid (IPv4) IP address, return a defanged version of that IP address.
+A defanged IP address replaces every period "." with "[.]".
+
+Example 1:
+Input: address = "1.1.1.1"
+Output: "1[.]1[.]1[.]1"
+
+Example 2:
+Input: address = "255.100.50.0"
+Output: "255[.]100[.]50[.]0"
+
+*/
+
+/**
+ * @param {string} address
+ * @return {string}
+ */
+ var defangIPaddr = function(address) {
+    let defAddr = "";
+    
+    for(let i = 0; i < address.length; i++) {
+        if(address[i] === ".") {
+            defAddr += "[.]";
+        } else {
+            defAddr += address[i]
+        }
+    }
+    
+    return defAddr;
+};
+
+// Using inbuilt function
+var defangIPaddr = function(address) {
+    if( typeof address !== 'string') return
+    return address.replaceAll(".", "[.]");
+};
