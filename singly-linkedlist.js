@@ -145,7 +145,7 @@ function ListNode(val, next) {
     this.next = (next===undefined ? null : next)
 }
 
- var mergeTwoLists = function(list1, list2) { 
+var mergeTwoLists = function(list1, list2) { 
     let mergedHead = new ListNode();
     let currentNode = mergedHead;
 
@@ -162,10 +162,31 @@ function ListNode(val, next) {
     currentNode.next = list1 || list2;
 
     return mergedHead.next;
- }
+}
  
 
+/* 83. Remove Duplicates from Sorted List
 
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+*/
+// Pseudo code
+// create a current pointer to the head
+// While it is exist
+//  - if the current link is not null and current value is equal to current link next value
+//    * Set the current link to 2 places ahead
+//  - Else set the current link to the next 
+// Return the head
 
-
- console.log(mergeTwoLists([1,2,4],[1,3,4]))
+var deleteDuplicates = function(head) {
+    let currentNode = head;
+    
+    while (currentNode) {
+        if(currentNode.next !== null && currentNode.val == currentNode.next.val) {
+            currentNode.next = currentNode.next.next;
+        } else {
+            currentNode = currentNode.next;
+        }
+    }
+    
+    return head
+};
