@@ -1,5 +1,6 @@
-# data structure/algorithm
+# Data structures and Algorithm
 
+Learning Data structures and Algorithm with JavaScript, including solving questions on LeetCode/Hackerrank
 # Data Structures
 
 <ul>
@@ -33,3 +34,5 @@
   <li>Dynamic Programming</li>
   <li>Big O Time & Space</li>
 </ul>
+
+
