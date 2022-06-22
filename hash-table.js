@@ -461,3 +461,41 @@ function average(salary) {
 
     return sum/length;
 }
+
+/*
+Create a function that removes the n smallest numbers from an array of integers arr, taking the following into account
+
+i. Integer n is the number of elements to remove from the array
+ii. If there are multiple elements with the same values, remove the one with the lower index first
+iii. If n is greater than the length of the array, return an empty array. If it is zero or less, return the original array
+iv. Don't change the order of the elements that are left
+*/
+
+function removeNSmallest(n, arr) {
+    // check input
+    if(!Array.isArray(arr) || typeof n !== 'number') {
+        return
+    }
+
+    if(n > arr.length) return arr = [];
+
+    if(n <= 0) return arr;
+
+    let finalArr = [];
+    let sortedArr = [...arr].sort((a,b) => a - b); // copy array and sort
+    let map = {};
+    // get the least numbers based on the integer and store in the object
+    for (let i = 0; i < n; i++) { 
+        const element = sortedArr[i];
+        map[element] = true;
+    }
+
+    // loop through the original and push elements excluding the smallest in the object
+    for (let j = 0; j < arr.length; j++) {
+        if(!map[arr[j]]) { 
+            finalArr.push(arr[j])
+        }
+    }
+
+    return finalArr
+}
