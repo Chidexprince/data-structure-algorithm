@@ -163,6 +163,18 @@ function firstRecurringCharacter2(arr){
 }
 // O(n)
 
+function firstRecurringCharacter(arr) {
+    let set = new Set();
+    for(let i = 0; i < arr.length; i++){
+        if(set.has(arr[i])) {
+            return arr[i];
+        }
+        set.add(arr[i])
+    }
+    return null
+}
+// O(n)
+
 /* 
 217. Contains Duplicate
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
@@ -292,8 +304,25 @@ function checkIfPangram1(sentence) {
     return map.length === 26;
 }
 
+
 function checkIfPangram2(sentence) {
     return new Set(sentence).size === 26;
+}
+
+function checkIfPangram3() {
+    if(!sentence || typeof sentence !== 'string' || sentence.length < 26) {
+        return false;
+    }
+
+    let set = new Set();
+    for (let i = 0; i < sentence.length; i++) {
+        if(!set.has(sentence[i])) {
+            set.add(sentence[i]);
+        }
+        
+    }
+
+    return set.size === 26;
 }
 
 /* 
